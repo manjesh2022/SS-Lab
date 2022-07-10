@@ -1,0 +1,36 @@
+.l part
+
+%{
+/* Develop, Implement and execute a program using YACC tool to recognize all strings ending
+with b preceded by n a’s using the grammar a^nb (note: input n value). */
+#include "y.tab.h"
+%}
+%%
+"a" {return A;}
+"b" {return B;}
+. return yytext[0];
+[\n] return 0;
+%%
+
+.y part
+
+%{
+#include<stdio.h>
+#include<stdlib.h>
+%}
+%token A B
+%%
+input:s '\n' {printf("Successful Grammar\n");exit(0);}
+s: a B
+a: A a|  ;
+%%
+main()
+{
+printf("Enter A String\n");
+yyparse();
+}
+int yyerror()
+{
+printf("Error \n");
+exit(0);
+}
